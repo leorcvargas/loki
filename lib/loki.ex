@@ -11,11 +11,7 @@ defmodule Loki do
     |> pick_color
   end
 
-  def pick_color(image) do
-    %Loki.Image{
-      hex_decimals: [r, g, b | _other_hex_decimals]
-    } = image
-
+  def pick_color(%Loki.Image{hex_decimals: [r, g, b | _other_hex_decimals]} = image) do
     %Loki.Image{image | color: {r, g, b}}
   end
 
