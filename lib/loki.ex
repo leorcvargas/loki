@@ -10,12 +10,24 @@ defmodule Loki do
     |> build_image_with_hex_decimals
     |> pick_color
     |> build_grid
+    |> filter_odd_squares
   end
 
-  def build_grid(%Loki.Image{hex_decimals: hex_decimals} = _image) do
-    hex_decimals
-    |> Enum.chunk_every(3, 3, :discard)
-    |> Enum.map(&mirror_row/1)
+  def filter_odd_squares(%Loki.Image{grid: grid} = image) do
+    filtered_grid = Enum.filter(grid, fn {value, _index} -> rem(value, 2) == 0 end)
+
+    %Loki.Image{image | grid: filtered_grid}
+  end
+
+  def build_grid(%Loki.Image{hex_decimals: hex_decimals} = image) do
+    grid =
+      hex_decimals
+      |> Enum.chunk_every(3, 3, :discard)
+      |> Enum.map(&mirror_row/1)
+      |> List.flatten()
+      |> Enum.with_index()
+
+    %Loki.Image{image | grid: grid}
   end
 
   def mirror_row(row) do
