@@ -1,6 +1,6 @@
 # Loki
 
-**TODO: Add description**
+An Elixir module for generating avatar icons based on a string input.
 
 ## Installation
 
