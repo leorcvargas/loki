@@ -25,3 +25,6 @@ loki-*.tar
 
 # Temporary files for e.g. tests
 /tmp
+
+# Generated icons
+generated_icons
