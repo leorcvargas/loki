@@ -15,7 +15,7 @@ defmodule Loki do
   def build_grid(%Loki.Image{hex_decimals: hex_decimals} = _image) do
     hex_decimals
     |> Enum.chunk_every(3, 3, :discard)
-    |> Enum.map(fn row -> Loki.mirror_row(row) end)
+    |> Enum.map(&mirror_row/1)
   end
 
   def mirror_row(row) do
